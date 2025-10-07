@@ -30,6 +30,13 @@ export default function Index() {
       return;
     }
 
+    void trackSearchEvent({
+      email: user.email,
+      query: q,
+      found: false,
+      stage: "initiated",
+    });
+
     setLoading(true);
     navigate(
       `/osintinforesults?q=${encodeURIComponent(q)}&refresh=${Date.now()}`,
