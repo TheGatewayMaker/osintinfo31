@@ -1,5 +1,4 @@
 import Layout from "@/components/layout/Layout";
-import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useMemo } from "react";
