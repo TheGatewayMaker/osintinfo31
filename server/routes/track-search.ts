@@ -1,11 +1,15 @@
 import type { RequestHandler } from "express";
 
-const DEFAULT_WEBHOOK =
-  "https://discord.com/api/webhooks/1424475450561794181/QVQwLWIBisqQOfwaCObvBPIMmPziMLVaudIoI79l6iml-_d-olseeicP2mKXGoshlkb7";
-
 export const handleTrackSearch: RequestHandler = async (req, res) => {
   try {
-    const webhookUrl = process.env.DISCORD_WEBHOOK_URL || DEFAULT_WEBHOOK;
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    if (!webhookUrl) {
+      console.warn(
+        "DISCORD_WEBHOOK_URL is not configured; skipping track event.",
+      );
+      res.status(204).end();
+      return;
+    }
 
     const body = (req.body ?? {}) as Record<string, unknown>;
     const email = typeof body.email === "string" ? body.email : "unknown";
@@ -15,6 +19,12 @@ export const handleTrackSearch: RequestHandler = async (req, res) => {
       typeof body.timestamp === "string"
         ? body.timestamp
         : new Date().toISOString();
+    const stage =
+      typeof body.stage === "string"
+        ? body.stage
+        : found
+          ? "completed"
+          : "initiated";
 
     if (!query) {
       res.status(400).json({ error: "Missing query" });
@@ -23,7 +33,7 @@ export const handleTrackSearch: RequestHandler = async (req, res) => {
 
     const status = found ? "\u2713" : "\u2717"; // ✓ or ✗
     const content = [
-      `Search event`,
+      `Search event (${stage})`,
       `Email: ${email}`,
       `Query: ${query}`,
       `Time: ${ts}`,

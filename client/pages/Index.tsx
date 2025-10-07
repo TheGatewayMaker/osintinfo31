@@ -7,6 +7,7 @@ import { FeatureGrid } from "@/components/home/FeatureGrid";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { computeRemaining } from "@/lib/user";
+import { trackSearchEvent } from "@/lib/track-search";
 
 export default function Index() {
   const [query, setQuery] = useState("");
@@ -29,6 +30,13 @@ export default function Index() {
       return;
     }
 
+    void trackSearchEvent({
+      email: user.email,
+      query: q,
+      found: false,
+      stage: "initiated",
+    });
+
     setLoading(true);
     navigate(
       `/osintinforesults?q=${encodeURIComponent(q)}&refresh=${Date.now()}`,
@@ -47,8 +55,8 @@ export default function Index() {
           <div className="mx-auto max-w-3xl text-center">
             <h1>
               <AnimatedGradientText
-                speed={2}
-                colorFrom="#a3a3a3"
+                speed={2.8}
+                colorFrom="#f3f3f3"
                 colorTo="#0a0a0a"
                 className="text-4xl font-black tracking-tight md:text-6xl"
               >
@@ -82,7 +90,7 @@ export default function Index() {
                 variant="hero"
                 onClick={onSearch}
                 disabled={loading}
-                className="h-12 rounded-2xl text-base shadow-xl hover:scale-[1.03]"
+                className="h-12 rounded-2xl text-base shadow-xl transition-transform"
               >
                 {loading ? "Searching…" : "Search"}
               </Button>
@@ -96,7 +104,7 @@ export default function Index() {
 
       <section className="container mx-auto pb-24">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.4em] text-brand-300">
+          <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-foreground/75 dark:text-foreground/70">
             Capabilities
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">

@@ -1,4 +1,5 @@
 import Layout from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -8,6 +9,9 @@ export default function Purchase() {
   const [params] = useSearchParams();
   const initialSearches = useMemo(() => params.get("searches") || "", [params]);
   const accountEmail = user?.email || "";
+  const labelClassName = "text-sm font-semibold tracking-wide text-foreground";
+  const fieldClassName =
+    "rounded-lg border-2 border-border/70 bg-background px-3 py-2 text-sm font-semibold text-foreground placeholder:text-foreground/45 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/25 focus:outline-none transition-shadow";
 
   return (
     <Layout>
@@ -20,7 +24,7 @@ export default function Purchase() {
         <form
           action="https://formspree.io/f/mqaydagp"
           method="POST"
-          className="mt-8 grid gap-6 max-w-2xl mx-auto rounded-2xl border border-border bg-card/80 p-6 shadow-lg shadow-brand-500/10 ring-1 ring-brand-500/10 backdrop-blur"
+          className="mt-8 grid gap-6 max-w-2xl mx-auto rounded-2xl border-2 border-border/80 bg-card/85 p-6 shadow-lg shadow-brand-500/10 ring-1 ring-brand-500/15 backdrop-blur dark:border-brand-300/35"
         >
           <input type="hidden" name="formType" value="purchase" />
           <input
@@ -29,7 +33,7 @@ export default function Purchase() {
             value="New balance purchase request"
           />
           <div className="grid gap-2">
-            <label htmlFor="searches" className="text-sm font-medium">
+            <label htmlFor="searches" className={labelClassName}>
               Number of Searches
             </label>
             <input
@@ -39,11 +43,11 @@ export default function Purchase() {
               pattern="[0-9]*"
               defaultValue={initialSearches}
               required
-              className="rounded-md border border-input bg-background px-3 py-2"
+              className={fieldClassName}
             />
           </div>
           <div className="grid gap-2">
-            <label htmlFor="accountEmail" className="text-sm font-medium">
+            <label htmlFor="accountEmail" className={labelClassName}>
               Account email on Osint Info
             </label>
             <input
@@ -52,11 +56,11 @@ export default function Purchase() {
               type="email"
               defaultValue={accountEmail}
               required
-              className="rounded-md border border-input bg-background px-3 py-2"
+              className={fieldClassName}
             />
           </div>
           <div className="grid gap-2">
-            <label htmlFor="contactEmail" className="text-sm font-medium">
+            <label htmlFor="contactEmail" className={labelClassName}>
               Preferred contact email
             </label>
             <input
@@ -65,32 +69,32 @@ export default function Purchase() {
               type="email"
               defaultValue={accountEmail}
               required
-              className="rounded-md border border-input bg-background px-3 py-2"
+              className={fieldClassName}
             />
-            <p className="text-xs text-foreground/60">
+            <p className="text-xs font-semibold text-foreground/70">
               We&apos;ll send payment instructions and confirmations here.
             </p>
           </div>
           <div className="grid gap-2">
-            <label htmlFor="alternateContact" className="text-sm font-medium">
+            <label htmlFor="alternateContact" className={labelClassName}>
               Alternate contact method (optional)
             </label>
             <input
               id="alternateContact"
               name="alternateContact"
               placeholder="Telegram, WhatsApp, Signal, etc."
-              className="rounded-md border border-input bg-background px-3 py-2"
+              className={fieldClassName}
             />
           </div>
           <div className="grid gap-2">
-            <label htmlFor="paymentMethod" className="text-sm font-medium">
+            <label htmlFor="paymentMethod" className={labelClassName}>
               Select Payment Method
             </label>
             <select
               id="paymentMethod"
               name="paymentMethod"
               required
-              className="rounded-md border border-input bg-background px-3 py-2"
+              className={`${fieldClassName} appearance-none`}
               defaultValue=""
             >
               <option value="" disabled>
@@ -105,22 +109,19 @@ export default function Purchase() {
             </select>
           </div>
           <div className="grid gap-2">
-            <label htmlFor="note" className="text-sm font-medium">
+            <label htmlFor="note" className={labelClassName}>
               Note (Optional)
             </label>
             <textarea
               id="note"
               name="note"
               rows={5}
-              className="rounded-md border border-input bg-background px-3 py-2"
+              className={`${fieldClassName} resize-none`}
             />
           </div>
-          <button
-            type="submit"
-            className="h-11 rounded-md bg-foreground text-background px-6 font-medium transition-transform hover:scale-[1.02]"
-          >
+          <Button type="submit" className="h-11 rounded-xl px-6 font-semibold">
             Submit Purchase Request
-          </button>
+          </Button>
         </form>
       </section>
     </Layout>
