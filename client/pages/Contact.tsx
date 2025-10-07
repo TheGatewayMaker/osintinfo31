@@ -1,6 +1,5 @@
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import Layout from "@/components/layout/Layout";
 import { MessageCircle } from "lucide-react";
 
 export default function Contact() {
