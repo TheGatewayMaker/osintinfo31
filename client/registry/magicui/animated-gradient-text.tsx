@@ -17,8 +17,10 @@ export function AnimatedGradientText({
 }: AnimatedGradientTextProps) {
   const style: CSSProperties = {
     backgroundImage: `linear-gradient(90deg, ${colorFrom}, ${colorTo}, ${colorFrom})`,
-    backgroundSize: "200% 100%",
+    backgroundSize: "260% 100%",
     animationDuration: `${speed}s`,
+    animationTimingFunction: "ease-in-out",
+    animationDirection: "alternate",
   };
 
   return (

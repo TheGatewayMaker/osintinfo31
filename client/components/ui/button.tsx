@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const gradientInteractive =
-  "text-primary-foreground [background-size:260%_260%] bg-[linear-gradient(115deg,#3f3f3f_0%,#262626_50%,#0a0a0a_100%)] hover:bg-[linear-gradient(115deg,#0a0a0a_0%,#262626_50%,#3f3f3f_100%)] motion-safe:animation-[gradient-x_8s_linear_infinite] motion-reduce:animation-none transform-gpu transition-transform duration-300 hover:-translate-y-0.5";
+  "text-primary-foreground [background-size:260%_260%] bg-[linear-gradient(115deg,#3f3f3f_0%,#262626_50%,#0a0a0a_100%)] hover:bg-[linear-gradient(115deg,#0a0a0a_0%,#262626_50%,#3f3f3f_100%)] dark:bg-[linear-gradient(115deg,#e5e5e5_0%,#cfcfcf_50%,#a8a8a8_100%)] dark:hover:bg-[linear-gradient(115deg,#a8a8a8_0%,#cfcfcf_50%,#e5e5e5_100%)] motion-safe:animation-[gradient-x_8s_ease-in-out_infinite_alternate] motion-reduce:animation-none transform-gpu transition-transform duration-300 hover:-translate-y-0.5";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
