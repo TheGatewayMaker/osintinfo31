@@ -12,29 +12,8 @@ import {
   isFirestorePermissionDenied,
 } from "@/lib/user";
 import { type NormalizedSearchResults } from "@/lib/search-normalize";
+import { trackSearchEvent } from "@/lib/track-search";
 import { toast } from "sonner";
-
-async function postSearchTrack(
-  email: string | null | undefined,
-  query: string,
-  found: boolean,
-) {
-  try {
-    const payload = {
-      email: email || "unknown",
-      query,
-      found,
-      timestamp: new Date().toISOString(),
-    };
-    await fetch("/api/track-search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-  } catch (e) {
-    console.warn("Search tracking failed", e);
-  }
-}
 
 function formatResultsText(
   site: string,
@@ -171,11 +150,12 @@ export default function OsintInfoResults() {
 
         if (lastTrackedQueryRef.current !== trimmed) {
           lastTrackedQueryRef.current = trimmed;
-          void postSearchTrack(
-            user.email,
-            trimmed,
-            freshNormalized.hasMeaningfulData,
-          );
+          void trackSearchEvent({
+            email: user.email,
+            query: trimmed,
+            found: freshNormalized.hasMeaningfulData,
+            stage: "completed",
+          });
         }
 
         if (
