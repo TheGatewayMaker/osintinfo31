@@ -47,7 +47,7 @@ export default function Index() {
           <div className="mx-auto max-w-3xl text-center">
             <h1>
               <AnimatedGradientText
-                speed={12}
+                speed={4}
                 colorFrom="#a3a3a3"
                 colorTo="#0a0a0a"
                 className="text-4xl font-black tracking-tight md:text-6xl"
