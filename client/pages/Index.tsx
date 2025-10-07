@@ -7,6 +7,7 @@ import { FeatureGrid } from "@/components/home/FeatureGrid";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { computeRemaining } from "@/lib/user";
+import { trackSearchEvent } from "@/lib/track-search";
 
 export default function Index() {
   const [query, setQuery] = useState("");
