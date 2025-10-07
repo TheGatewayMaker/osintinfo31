@@ -19,7 +19,9 @@ export const handler = async (event: any) => {
 
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) {
-    console.warn("DISCORD_WEBHOOK_URL is not configured; skipping track event.");
+    console.warn(
+      "DISCORD_WEBHOOK_URL is not configured; skipping track event.",
+    );
     return { statusCode: 204, headers: { ...corsHeaders } };
   }
 

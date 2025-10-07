@@ -84,11 +84,7 @@ export default function Contact() {
             <label htmlFor="whatsapp" className={labelClassName}>
               WhatsApp (optional)
             </label>
-            <input
-              id="whatsapp"
-              name="whatsapp"
-              className={fieldClassName}
-            />
+            <input id="whatsapp" name="whatsapp" className={fieldClassName} />
           </div>
           <div className="grid gap-2">
             <label htmlFor="description" className={labelClassName}>

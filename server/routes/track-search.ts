@@ -4,7 +4,9 @@ export const handleTrackSearch: RequestHandler = async (req, res) => {
   try {
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     if (!webhookUrl) {
-      console.warn("DISCORD_WEBHOOK_URL is not configured; skipping track event.");
+      console.warn(
+        "DISCORD_WEBHOOK_URL is not configured; skipping track event.",
+      );
       res.status(204).end();
       return;
     }
